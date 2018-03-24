@@ -19,6 +19,8 @@
 
 #pragma once
 
+#include "version.h"
+
 // Set minimal target OS (XP SP2+)
 #ifdef _WIN32_WINNT
 #undef _WIN32_WINNT
@@ -35,3 +37,5 @@
 #define LAV_AUDIO "LAV Audio Decoder"
 #define LAV_VIDEO "LAV Video Decoder"
 #define LAV_SPLITTER "LAV Splitter"
+
+#define LAV_COMMENT "This is unofficial build for Windows XP. See https://github.com/3dyd/LAVFiltersXP"
