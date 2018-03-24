@@ -89,6 +89,7 @@
       <ModuleDefinitionFile>LAVVideo.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='Win32'">$(ProjectDir)decoders\mvc\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64'">$(ProjectDir)decoders\mvc\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ImageHasSafeExceptionHandlers>
     </Link>
     <CustomBuildStep>
       <Command>copy "$(TargetDir)\$(TargetName)$(TargetExt)" "$(OutDir).."</Command>
