@@ -54,7 +54,6 @@ typedef enum LAVPixelFormat {
   LAVPixFmt_RGB48,       ///< RGB48, in RGB order (16-bit per pixel)
 
   LAVPixFmt_DXVA2,       ///< DXVA2 Surface
-  LAVPixFmt_D3D11,       ///< D3D11 Surface
 
   LAVPixFmt_NB,          ///< number of formats
 } LAVPixelFormat;
@@ -452,7 +451,6 @@ ILAVDecoder *CreateDecoderCUVID();
 ILAVDecoder *CreateDecoderQuickSync();
 ILAVDecoder *CreateDecoderDXVA2();
 ILAVDecoder *CreateDecoderDXVA2Native();
-ILAVDecoder *CreateDecoderD3D11();
 ILAVDecoder *CreateDecoderMSDKMVC();
 
 HRESULT VerifyD3D9Device(DWORD & dwIndex, DWORD dwDeviceId);

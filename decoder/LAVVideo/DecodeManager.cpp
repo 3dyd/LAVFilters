@@ -69,8 +69,6 @@ ILAVDecoder * CDecodeManager::CreateHWAccelDecoder(LAVHWAccel hwAccel)
     pDecoder = CreateDecoderDXVA2();
   else if (hwAccel == HWAccel_DXVA2Native)
     pDecoder = CreateDecoderDXVA2Native();
-  else if (hwAccel == HWAccel_D3D11)
-    pDecoder = CreateDecoderD3D11();
 
   return pDecoder;
 }
@@ -171,7 +169,7 @@ STDMETHODIMP CDecodeManager::Decode(IMediaSample *pSample)
     m_bHWDecoderFailed = TRUE;
 
     // If we're disabling DXVA2 Native decoding, we need to release resources now
-    if (wcscmp(m_pDecoder->GetDecoderName(), L"dxva2n") == 0 || wcscmp(m_pDecoder->GetDecoderName(), L"d3d11 native") == 0) {
+    if (wcscmp(m_pDecoder->GetDecoderName(), L"dxva2n") == 0) {
       m_pLAVVideo->ReleaseAllDXVAResources();
       m_pLAVVideo->GetOutputPin()->GetConnected()->BeginFlush();
       m_pLAVVideo->GetOutputPin()->GetConnected()->EndFlush();
