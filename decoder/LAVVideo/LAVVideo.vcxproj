@@ -83,12 +83,14 @@
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LAVVIDEO_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)qsdecoder;$(ProjectDir)decoders\mvc\include</AdditionalIncludeDirectories>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NoExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <AdditionalDependencies>advapi32.lib;ole32.lib;gdi32.lib;winmm.lib;user32.lib;oleaut32.lib;shell32.lib;Shlwapi.lib;Comctl32.lib;d3d9.lib;mfuuid.lib;dmoguids.lib;strmbase.lib;dsutil.lib;avutil-lav.lib;avcodec-lav.lib;swscale-lav.lib;avfilter-lav.lib;libmfx.lib</AdditionalDependencies>
       <ModuleDefinitionFile>LAVVideo.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='Win32'">$(ProjectDir)decoders\mvc\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64'">$(ProjectDir)decoders\mvc\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ImageHasSafeExceptionHandlers>
     </Link>
     <CustomBuildStep>
       <Command>copy "$(TargetDir)\$(TargetName)$(TargetExt)" "$(OutDir).."</Command>

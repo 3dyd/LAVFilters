@@ -135,6 +135,10 @@ int g_cTemplates = sizeof(g_Templates) / sizeof(g_Templates[0]);
 // self-registration entrypoint
 STDAPI DllRegisterServer()
 {
+  if (IsVistaOrNewer()) {
+    return HRESULT_FROM_WIN32(ERROR_BAD_ENVIRONMENT);
+  }
+
   std::list<LPCWSTR> chkbytes;
 
   // BluRay
@@ -151,6 +155,10 @@ STDAPI DllRegisterServer()
 
 STDAPI DllUnregisterServer()
 {
+  if (IsVistaOrNewer()) {
+    return HRESULT_FROM_WIN32(ERROR_BAD_ENVIRONMENT);
+  }
+
   UnRegisterSourceFilter(MEDIASUBTYPE_LAVBluRay);
 
   // base classes will handle de-registration using the factory template table
@@ -168,6 +176,11 @@ BOOL WINAPI DllMain(HANDLE hDllHandle, DWORD dwReason, LPVOID lpReserved)
 
 void CALLBACK OpenConfiguration(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, int nCmdShow)
 {
+  if (IsVistaOrNewer()) {
+    MessageBox(hwnd, TEXT(LAV_COMMENT), NULL, MB_ICONERROR);
+    return;
+  }
+
   HRESULT hr = S_OK;
   CUnknown *pInstance = CreateInstance<CLAVSplitter>(nullptr, &hr);
   IBaseFilter *pFilter = nullptr;
