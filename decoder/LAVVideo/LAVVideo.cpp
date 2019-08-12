@@ -2514,23 +2514,6 @@ STDMETHODIMP_(DWORD) CLAVVideo::GetHWAccelDeviceIndex(LAVHWAccel hwAccel, DWORD 
       *pdwDeviceIdentifier = dwDeviceId;
 
     return dwDeviceIndex;
-  } else if (hwAccel == HWAccel_D3D11) {
-      DWORD dwDeviceIndex = m_settings.HWAccelDeviceD3D11;
-      DWORD dwDeviceId = m_settings.HWAccelDeviceD3D11Desc;
-
-      // verify the values and re-match them to adapters appropriately
-      if (dwDeviceIndex != LAVHWACCEL_DEVICE_DEFAULT && dwDeviceId != 0) {
-        hr = VerifyD3D11Device(dwDeviceIndex, dwDeviceId);
-        if (FAILED(hr)) {
-          dwDeviceIndex = LAVHWACCEL_DEVICE_DEFAULT;
-          dwDeviceId = 0;
-        }
-      }
-
-      if (pdwDeviceIdentifier)
-        *pdwDeviceIdentifier = dwDeviceId;
-
-      return dwDeviceIndex;
     }
 
   if (pdwDeviceIdentifier)
@@ -2549,10 +2532,6 @@ STDMETHODIMP CLAVVideo::SetHWAccelDeviceIndex(LAVHWAccel hwAccel, DWORD dwIndex,
     if (hwAccel == HWAccel_DXVA2CopyBack) {
       m_settings.HWAccelDeviceDXVA2 = dwIndex;
       m_settings.HWAccelDeviceDXVA2Desc = dwDeviceIdentifier;
-    }
-    else if (hwAccel == HWAccel_D3D11) {
-      m_settings.HWAccelDeviceD3D11 = dwIndex;
-      m_settings.HWAccelDeviceD3D11Desc = dwDeviceIdentifier;
     }
     return SaveSettings();
   }

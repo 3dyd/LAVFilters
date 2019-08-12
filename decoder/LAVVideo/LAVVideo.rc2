@@ -13,6 +13,7 @@
 
 #include "resource.h"
 #include "..\..\common\includes\common_defines.h"
+#include "..\..\common\includes\version.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////

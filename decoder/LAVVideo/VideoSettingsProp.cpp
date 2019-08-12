@@ -392,7 +392,7 @@ HRESULT CLAVVideoSettingsProp::UpdateHWOptions()
 
 
   SendDlgItemMessage(m_Dlg, IDC_HWACCEL_DEVICE_SELECT, CB_RESETCONTENT, 0, 0);
-  SendDlgItemMessage(m_Dlg, IDC_HWACCEL_DEVICE_SELECT, CB_ADDSTRING, 0, (hwAccel == HWAccel_D3D11) ? (LPARAM)L"Automatic (Native)" : (LPARAM)L"Automatic");
+  SendDlgItemMessage(m_Dlg, IDC_HWACCEL_DEVICE_SELECT, CB_ADDSTRING, 0, (LPARAM)L"Automatic");
 
   DWORD dwnDevices = m_pVideoSettings->GetHWAccelNumDevices(hwAccel);
   for (DWORD dwDevice = 0; dwDevice < dwnDevices; dwDevice++)
@@ -405,13 +405,7 @@ HRESULT CLAVVideoSettingsProp::UpdateHWOptions()
     }
   }
 
-  if (hwAccel == HWAccel_D3D11 && !IsWindows8OrNewer())
-  {
-    m_HWDeviceIndex = 0;
-    dwnDevices = 0;
-    SendDlgItemMessage(m_Dlg, IDC_LBL_HWACCEL_DEVICE_HINT, WM_SETTEXT, 0, (LPARAM)hwHintD3D11NotSupported);
-  }
-  else if (dwnDevices == 0) {
+  if (dwnDevices == 0) {
     m_HWDeviceIndex = 0;
     SendDlgItemMessage(m_Dlg, IDC_LBL_HWACCEL_DEVICE_HINT, WM_SETTEXT, 0, (LPARAM)hwHintNoDeviceChoice);
   }
@@ -425,8 +419,6 @@ HRESULT CLAVVideoSettingsProp::UpdateHWOptions()
 
     if (hwAccel == HWAccel_DXVA2CopyBack)
       SendDlgItemMessage(m_Dlg, IDC_LBL_HWACCEL_DEVICE_HINT, WM_SETTEXT, 0, (LPARAM)hwHintDXVA2Display);
-    else if (hwAccel == HWAccel_D3D11)
-      SendDlgItemMessage(m_Dlg, IDC_LBL_HWACCEL_DEVICE_HINT, WM_SETTEXT, 0, (LPARAM)hwHintD3D11DeviceHint);
     else
       SendDlgItemMessage(m_Dlg, IDC_LBL_HWACCEL_DEVICE_HINT, WM_SETTEXT, 0, (LPARAM)L"");
   }
